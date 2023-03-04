@@ -1,7 +1,6 @@
 package modules
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"main/utils"
@@ -26,19 +25,14 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 		utils.BadRequest(w, utils.ErrNotPost)
 		return
 	}
-	if !utils.IsMultiPartForm(r) {
-		utils.BadRequest(w, utils.ErrNotMultipartForm)
-		return
-	}
-	fmt.Println("uploading file")
+
 	r.ParseMultipartForm(32 << 20)
-	file, _, err := r.FormFile("file")
-	fmt.Println("file uploaded")
+	file, handle, err := r.FormFile("file")
 	if err != nil {
 		utils.ErrorWithPrefix(w, err, http.StatusBadRequest, "could not parse file")
 	}
 	defer file.Close()
-	f, err := os.OpenFile(DOWNLOAD_PATH+"haha", os.O_WRONLY|os.O_CREATE, 0666)
+	f, err := os.OpenFile(DOWNLOAD_PATH+handle.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		utils.InternalServerError(w, err)
 		return
@@ -96,15 +90,23 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 
 type File struct {
 	Filename     string `json:"filename"`
-	FileSize     int64  `json:"filesize"`
+	FileSize     string `json:"filesize"`
 	FileExt      string `json:"fileext"`
 	DateModified string `json:"datemodified"`
+	Icon         string `json:"icon"`
+	IsDir        bool   `json:"isdir"`
 }
 
 func GetFiles(w http.ResponseWriter, r *http.Request) {
-	files, err := os.ReadDir(DOWNLOAD_PATH)
+	q := r.URL.Query()
+	path := q.Get("path")
+	files, err := os.ReadDir(DOWNLOAD_PATH + path)
 	if err != nil {
 		utils.InternalServerError(w, err)
+		return
+	}
+	if len(files) == 0 {
+		utils.Ok(w, []File{})
 		return
 	}
 	var file_list []File
@@ -113,12 +115,23 @@ func GetFiles(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			continue
 		}
+		ext := "Folder"
+		size := f.Size()
+		if !file.IsDir() {
+			ext = filepath.Ext(f.Name())[1:]
+		} else {
+			size, _ = utils.GetFolderSize(DOWNLOAD_PATH + f.Name())
+		}
 		file_list = append(file_list, File{
 			Filename:     file.Name(),
-			FileSize:     f.Size(),
-			FileExt:      filepath.Ext(f.Name())[1:],
+			FileSize:     utils.BytesToSize(size),
+			FileExt:      ext,
 			DateModified: f.ModTime().String(),
+			Icon:         utils.GetIcon(ext, f.IsDir()),
 		})
+		if file.IsDir() {
+			file_list[len(file_list)-1].IsDir = true
+		}
 	}
 	utils.Ok(w, file_list)
 }

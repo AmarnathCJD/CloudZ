@@ -2,6 +2,7 @@ var ui = {
     upload_button: document.getElementById('upload-button'),
     upload_input: document.getElementById('upload-input'),
     upload_progress: document.getElementById('upload-progress'),
+    progress_bar : document.getElementById('progress-bar'),
 
     add_download_button: document.getElementById('add-download-button'),
     add_download_input: document.getElementById('add-download-input'),
@@ -14,24 +15,28 @@ function upload_file() {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        var data = e.target.result;
+        // upload file to server as multipart/form-data
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://127.0.0.1:8080/upload', true);
-        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-        // set multipart field file
-        xhr.setRequestHeader('Content-Disposition', 'form-data; name="file"; filename="' + file.name + '"');
-        // set multipart field file size
-        xhr.setRequestHeader('Content-Length', file.size);
-        // set multipart field file type
-        // start upload
-        
+        xhr.open('POST', '/upload', true);
+        ui.upload_progress.hidden = false;
         xhr.upload.onprogress = function (e) {
             if (e.lengthComputable) {
                 var percent = (e.loaded / e.total) * 100;
-                ui.upload_progress.value = percent;
+                ui.progress_bar.style.width = percent + '%';
+            }
+        }
+        xhr.onload = function () {
+            if (this.status == 200) {
+                ui.upload_progress.hidden = true;
+                ui.progress_bar.style.width = '0%';
+                // upload complete
+                refresh_file_manager();
             }
         };
-        xhr.send(data);
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('name', file.name);
+        xhr.send(formData);
     };
     reader.readAsArrayBuffer(file);
 }

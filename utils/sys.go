@@ -73,3 +73,33 @@ func JoinPathWithDir(dir string, path string) string {
 	}
 	return filepath.Join(dir, path)
 }
+
+func BytesToSize(bytes int64) string {
+	const unit = 1000
+	if bytes < unit {
+		return fmt.Sprintf("%d B", bytes)
+	}
+	div, exp := int64(unit), 0
+	for n := bytes / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.1f %cB", float64(bytes)/float64(div), "kMGTPE"[exp])
+}
+
+func GetFolderSize(path string) (int64, error) {
+	var size int64
+	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			size += info.Size()
+		} else {
+			sizeF, _ := GetFolderSize(info.Name())
+			size += sizeF
+		}
+		return nil
+	})
+	return size, err
+}
