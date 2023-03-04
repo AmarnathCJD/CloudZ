@@ -24,5 +24,5 @@ func main() {
 	setupEndpoints()
 	utils.HandleCtrlZ()
 	utils.SendPortAndIP(8080)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(utils.GetOutboundPort(), nil)
 }
