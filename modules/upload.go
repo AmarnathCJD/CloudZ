@@ -6,6 +6,7 @@ import (
 	"main/utils"
 	"net/http"
 	"os"
+	"encoding/base64"
 	"path/filepath"
 )
 
@@ -49,7 +50,7 @@ func GenFileDownloadKey(filename string) string {
 	if err != nil {
 		log.Fatal("Error encrypting filename: ", err)
 	}
-	return prefix + string(encrypted)
+	return prefix + base64.RawURLEncoding.EncodeToString(encrypted)
 }
 
 func DownloadFileRequest(w http.ResponseWriter, r *http.Request) {
@@ -69,8 +70,10 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	const prefix = "file_download_"
+	
 	default_aes_key := "12345678901234567890123456789012"
-	encrypted := []byte(key[len(prefix):])
+	encrypted := base64.RawURLEncoding.DecodeString(key[len(prefix):])
+	
 	decrypted, err := utils.DecryptAES(encrypted, default_aes_key)
 	if err != nil {
 		utils.BadRequest(w, utils.ErrInvalidKey)
