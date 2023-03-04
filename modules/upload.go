@@ -80,6 +80,10 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	filename := string(decrypted)
+	if r.URL.Query().Get("stream") != "" {
+                http.ServeFile(w, r, DOWNLOAD_PATH+filename)
+		return
+        }
 	f, err := os.Open(DOWNLOAD_PATH + filename)
 	if err != nil {
 		utils.NotFound(w, utils.ErrFileNotFound)
