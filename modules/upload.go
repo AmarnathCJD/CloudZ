@@ -72,7 +72,7 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 	const prefix = "file_download_"
 	
 	default_aes_key := "12345678901234567890123456789012"
-	encrypted := base64.RawURLEncoding.DecodeString(key[len(prefix):])
+	encrypted, _:= base64.RawURLEncoding.DecodeString(key[len(prefix):])
 	
 	decrypted, err := utils.DecryptAES(encrypted, default_aes_key)
 	if err != nil {
