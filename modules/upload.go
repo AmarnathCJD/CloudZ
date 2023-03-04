@@ -40,7 +40,7 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 	}
 	defer f.Close()
 	io.Copy(f, file)
-	utils.Ok(w, map[string]string{"message": "file uploaded successfully"})
+	utils.Ok(w, map[string]string{"message": "file uploaded successfully", "key": GenFileDownloadKey(handle.Filename)})
 }
 
 func GenFileDownloadKey(filename string) string {
