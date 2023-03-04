@@ -45,7 +45,7 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 func GenFileDownloadKey(filename string) string {
 	const prefix = "file_download_"
 	default_aes_key := "12345678901234567890123456789012"
-	encrypted, err := utils.AesEncrypt([]byte(filename), default_aes_key)
+	encrypted, err := utils.EncryptAES([]byte(filename), default_aes_key)
 	if err != nil {
 		log.Fatal("Error encrypting filename: ", err)
 	}
@@ -71,7 +71,7 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 	const prefix = "file_download_"
 	default_aes_key := "12345678901234567890123456789012"
 	encrypted := []byte(key[len(prefix):])
-	decrypted, err := utils.AesDecrypt(encrypted, default_aes_key)
+	decrypted, err := utils.DecryptAES(encrypted, default_aes_key)
 	if err != nil {
 		utils.BadRequest(w, utils.ErrInvalidKey)
 		return
