@@ -8,8 +8,20 @@ import (
 	"os/signal"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"runtime"
 )
+
+func GetOutboundPort() string {
+	if p := os.Getenv("PORT"); p != "" {
+		if !strings.HasPrefix(p, ":") {
+			return ":" + p
+		} else {
+			return p
+		}
+	}
+	return ":80"
+}
 
 func HandleCtrlZ() {
 	c := make(chan os.Signal, 1)
