@@ -38,20 +38,20 @@
                 <ul
                     class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="/"
+                        <a href="#"
                             class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="https://kavyachandra.me"
+                        <a href="#"
                             class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                     </li>
                     <li>
-                        <a href="/"
+                        <a href="#"
                             class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
                     </li>
                     <li>
-                        <a href="https://t.me/roseloverx"
+                        <a href="#"
                             class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                     </li>
                 </ul>
@@ -59,73 +59,30 @@
         </div>
     </nav>
 
+    <div id="toast-simple"
+        class="hidden absolute bottom-5 right-5 flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+        role="alert">
+        <svg aria-hidden="true" class="w-5 h-5 text-blue-600 dark:text-blue-500" focusable="false" data-prefix="fas"
+            data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z">
+            </path>
+        </svg>
+        <div class="pl-4 text-sm font-normal">File upload Success.</div>
+    </div>
+
 
     <!-- verical yellow line divider dividing the nav bar and the main content -->
     <hr class="border-yellow-500 border-2 border-solid my-0" bg-yellow-500 />
 
     <!-- File upload section -->
 
-
-
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-8">
-
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full px-4">
-
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-
                         <div class="px-4 py-5 sm:p-6">
-
-                            <form>
-                                <div class="flex mb-4">
-                                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                                        type="button">All categories <svg aria-hidden="true" class="w-4 h-4 ml-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg></button>
-                                    <div id="dropdown"
-                                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdown-button">
-                                            <li>
-                                                <button type="button"
-                                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Video</button>
-                                            </li>
-                                            <li>
-                                                <button type="button"
-                                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Music</button>
-                                            </li>
-                                            <li>
-                                                <button type="button"
-                                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Document</button>
-                                            </li>
-                                            <li>
-                                                <button type="button"
-                                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Image</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="relative w-full">
-                                        <input type="search" id="search-dropdown"
-                                            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                            placeholder="Search Files..." required>
-                                        <button type="submit"
-                                            class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                            <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                            </svg>
-                                            <span class="sr-only">Search</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-
                             <h3 class="text-lg leading-6 font-medium text-gray-900">
                                 Upload your file
                             </h3>
@@ -173,7 +130,7 @@
         </div>
     </div>
     <!-- Floating upload progress bar, hidden by default -->
-    <div class="fixed bottom-0 right-0 mb-4 mr-4" id="upload-progress" style="visibility: hidden;">
+    <div class="fixed bottom-0 right-0 mb-4 mr-4 hidden" id="upload-progress">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="px-4 py-5 sm:p-6">
                 <div class="text-lg leading-6 font-medium text-gray-900">
@@ -196,28 +153,93 @@
         </div>
     </div>
 
+    <!-- File Info section -->
+
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-8">
-            <div class="">
+            <div class="flex flex-wrap -mx-4">
                 <div class="w-full px-4">
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div class="px-4 py-5 sm:p-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                File Manager
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="file-info-header">
+                                Loading...
                             </h3>
-                            <hr class="mt-2 mb-4 border-red-300 border-2 border-solid my-0 bg-red-300" />
-                            <div class="flex flex-col" id="files-manager">
-                                <p class="text-gray-500">Loading...</p>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>
+                                    File information.
+                                </p>
+                            </div>
+                            <div class="mt-4">
+                                <!-- Display Properties of the file -->
+                                <div class="flex flex-col">
+
+                                    <ul
+                                        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                                        <li class="mr-2">
+                                            <a href="#" aria-current="page"
+                                                class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">Profile</a>
+                                        </li>
+                                        <li class="mr-2">
+                                            <a href="#"
+                                                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Dashboard</a>
+                                        </li>
+                                        <li class="mr-2">
+                                            <a href="#"
+                                                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Settings</a>
+                                        </li>
+                                        <li class="mr-2">
+                                            <a href="#"
+                                                class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Contacts</a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                class="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="inline-flex rounded-md shadow-sm" role="group">
+                                        <button type="button"
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                            <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            Profile
+                                        </button>
+                                        <button type="button"
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                            <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z">
+                                                </path>
+                                            </svg>
+                                            Settings
+                                        </button>
+                                        <button type="button"
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                            <svg aria-hidden="true" class="w-4 h-4 mr-2 fill-current"
+                                                fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            Downloads
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-    <script src="./assets/files.js"></script>
-    <script src="./assets/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+        <script src="./assets/main.js"></script>
 </body>

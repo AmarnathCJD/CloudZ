@@ -8,9 +8,25 @@ import (
 	"os/signal"
 	"path/filepath"
 	"regexp"
-	"strings"
 	"runtime"
+	"strings"
 )
+
+type ZLogger struct{}
+
+var Logger = ZLogger{}
+
+func (l *ZLogger) Info(msg string) {
+	log.Println("ZTorr - [INFO] - " + msg)
+}
+
+func (l *ZLogger) Error(msg string) {
+	log.Println("ZTorr - [ERROR] - " + msg)
+}
+
+func (l *ZLogger) Fatal(msg string) {
+	log.Fatal("ZTorr - [FATAL] - " + msg)
+}
 
 func GetOutboundPort() string {
 	if p := os.Getenv("PORT"); p != "" {
@@ -21,6 +37,13 @@ func GetOutboundPort() string {
 		}
 	}
 	return ":80"
+}
+
+func GetPortFromBinding(binding string) string {
+	if strings.HasPrefix(binding, ":") {
+		return binding[1:]
+	}
+	return binding
 }
 
 func HandleCtrlZ() {
@@ -34,10 +57,10 @@ func HandleCtrlZ() {
 	}()
 }
 
-func SendPortAndIP(port int) {
+func SendPortAndIP(port string) {
 	ip := GetOutboundIP()
-	fmt.Println("Server running on: " + ip + ":" + fmt.Sprint(port))
-	fmt.Println("Press Ctrl+C to stop")
+	Logger.Info("Server running on: " + ip + port)
+	Logger.Info("Press Ctrl+C to stop")
 }
 
 func GetOutboundIP() string {

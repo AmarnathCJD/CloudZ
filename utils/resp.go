@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -37,7 +36,6 @@ func IsMultiPartForm(r *http.Request) bool {
 }
 
 func IsPost(r *http.Request) bool {
-	fmt.Println(r.Method)
 	return r.Method == "POST"
 }
 

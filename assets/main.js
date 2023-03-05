@@ -20,6 +20,7 @@ function upload_file() {
         xhr.open('POST', '/upload', true);
         ui.upload_progress.hidden = false;
         xhr.upload.onprogress = function (e) {
+            console.log(e);
             if (e.lengthComputable) {
                 var percent = (e.loaded / e.total) * 100;
                 ui.progress_bar.style.width = percent + '%';

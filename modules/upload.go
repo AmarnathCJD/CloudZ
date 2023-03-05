@@ -1,12 +1,12 @@
 package modules
 
 import (
+	"encoding/base64"
 	"io"
 	"log"
 	"main/utils"
 	"net/http"
 	"os"
-	"encoding/base64"
 	"path/filepath"
 )
 
@@ -70,10 +70,10 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	const prefix = "file_download_"
-	
+
 	default_aes_key := "12345678901234567890123456789012"
-	encrypted, _:= base64.RawURLEncoding.DecodeString(key[len(prefix):])
-	
+	encrypted, _ := base64.RawURLEncoding.DecodeString(key[len(prefix):])
+
 	decrypted, err := utils.DecryptAES(encrypted, default_aes_key)
 	if err != nil {
 		utils.BadRequest(w, utils.ErrInvalidKey)
@@ -81,9 +81,9 @@ func ServeFile(w http.ResponseWriter, r *http.Request) {
 	}
 	filename := string(decrypted)
 	if r.URL.Query().Get("stream") != "" {
-                http.ServeFile(w, r, DOWNLOAD_PATH+filename)
+		http.ServeFile(w, r, DOWNLOAD_PATH+filename)
 		return
-        }
+	}
 	f, err := os.Open(DOWNLOAD_PATH + filename)
 	if err != nil {
 		utils.NotFound(w, utils.ErrFileNotFound)
