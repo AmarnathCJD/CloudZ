@@ -24,6 +24,47 @@ func setupEndpoints() {
 		temp.Execute(w, nil)
 	})
 
+	http.HandleFunc("/charge", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "POST" {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "Unable to parse form", http.StatusBadRequest)
+			return
+		}
+		card := r.FormValue("card")
+		expMo := r.FormValue("expMo")
+		expYr := r.FormValue("expYr")
+		cvv := r.FormValue("cvv")
+		rx := modules.StarReq{}
+		if err := rx.StepOne(); err != nil {
+			http.Error(w, "Unable to charge card", http.StatusBadRequest)
+			return
+		}
+		if err := rx.StepTwo(); err != nil {
+			http.Error(w, "Unable to charge card", http.StatusBadRequest)
+			return
+		}
+		code, declineCode, message, err := rx.StepThree(card, expMo, expYr, cvv)
+		if err != nil {
+			http.Error(w, "Unable to charge card", http.StatusBadRequest)
+			return
+		}
+		if code == "" {
+			utils.Ok(w, map[string]string{
+				"success": "true",
+				"charged": "4460",
+			})
+			return
+		}
+		utils.Ok(w, map[string]string{
+			"code":         code,
+			"decline_code": declineCode,
+			"message":      message,
+		})
+	})
+
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 }
 
